@@ -1,3 +1,5 @@
+// [SublimeLinter cpplint-filter:"-runtime/int"]
+
 /* Blink without Delay
 
  Turns on and off a light emitting diode(LED) connected to a digital
@@ -21,6 +23,7 @@
  http://www.arduino.cc/en/Tutorial/BlinkWithoutDelay
  */
 
+
 // constants won't change. Used here to
 // set pin numbers:
 const int LEDPIN = 13;  // the number of the LED pin
@@ -32,14 +35,6 @@ unsigned long PREVIOUSMILLIS = 0;  // will store last time LED was updated
 // the follow variables is a long because the time, measured in miliseconds,
 // will quickly become a bigger number than can be stored in an int.
 unsigned long INTERVAL = 200;  // interval at which to blink (milliseconds)
-
-class arsch {
- public:
-    arsch();
-
- private:
-    void dosmth();
-};
 
 void
 setup() {
@@ -64,10 +59,10 @@ void loop() {
         // if the LED is off turn it on and vice-versa:
         if (LEDSTATE == LOW) {
             LEDSTATE = HIGH;
-            Serial.print("\ron ");
+            Serial.print("on \n");
         } else {
             LEDSTATE = LOW;
-            Serial.print("\roff");
+            Serial.print("off\n");
         }
 
         // set the LED with the ledState of the variable:
