@@ -34,19 +34,19 @@ void print0() {
 void print1at(short i, short j) {
     // write y axis
     digitalWrite(DATAPIN, HIGH);
-    clock(GRIDLENGTH - j);
+    clock(GRIDLENGTH - j - 1);
     digitalWrite(DATAPIN, LOW);
     clock();
     digitalWrite(DATAPIN, HIGH);
-    clock(j - 1);
+    clock(j);
 
     // write x axis
     digitalWrite(DATAPIN, LOW);
-    clock(i - 1);
+    clock(i);
     digitalWrite(DATAPIN, HIGH);
     clock();
     digitalWrite(DATAPIN, LOW);
-    clock(GRIDLENGTH - i);
+    clock(GRIDLENGTH - i - 1);
 
     latch();
 }
@@ -166,7 +166,7 @@ void shiftOut2D(char DATA[GRIDLENGTH][GRIDLENGTH], unsigned long displayTimeMUS)
         for (short i = 0; i < GRIDLENGTH; ++i) {
             for (short j = 0; j < GRIDLENGTH; ++j) {
                 if (DATA[i][j] == 0) { print0(); } else {
-                    print1at(i + 1, j + 1);
+                    print1at(i, j);
                 }
                 print0();
             }

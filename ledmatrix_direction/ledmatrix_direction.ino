@@ -39,19 +39,19 @@ void print0() {
 void print1at(short i, short j) {
     // write y axis
     digitalWrite(DATAPIN, HIGH);
-    clock(GRIDLENGTH - j);
+    clock(GRIDLENGTH - j - 1);
     digitalWrite(DATAPIN, LOW);
     clock();
     digitalWrite(DATAPIN, HIGH);
-    clock(j - 1);
+    clock(j);
 
     // write x axis
     digitalWrite(DATAPIN, LOW);
-    clock(i - 1);
+    clock(i);
     digitalWrite(DATAPIN, HIGH);
     clock();
     digitalWrite(DATAPIN, LOW);
-    clock(GRIDLENGTH - i);
+    clock(GRIDLENGTH - i - 1);
 
     latch();
 }
@@ -72,7 +72,7 @@ void shiftOut2D(char DATA[GRIDLENGTH][GRIDLENGTH], unsigned long displayTimeMUS)
         for (short i = 0; i < GRIDLENGTH; ++i) {
             for (short j = 0; j < GRIDLENGTH; ++j) {
                 if (DATA[i][j] == 0) { print0(); } else {
-                    print1at(i + 1, j + 1);
+                    print1at(i, j);
                 }
                 print0();
             }
@@ -87,6 +87,21 @@ int readInput() {
     int inputRight = digitalRead(INPUTRIGHTPIN);
     int inputUp = digitalRead(INPUTUPPIN);
     int inputDown = digitalRead(INPUTDOWNPIN);
+
+    // should me more like a lookup table
+    // l   r   u   d  |  value
+    // –––––––––––––––|––––––––––––––––––
+    // 0   0   0   0  |  0   IDLE
+    // 1   0   0   0  |  1   LEFT
+    // 0   1   0   0  |  2   RIGHT
+    // 0   0   1   0  |  3   UP
+    // 0   0   0   1  |  4   DOWN
+    // 1   0   1   0  |  5   UPLEFT
+    // 0   1   1   0  |  6   UPRIGHT
+    // 1   0   0   1  |  7   DOWNLEFT
+    // 0   1   0   1  |  8   DOWNRIGHT
+    //      else      |  0   IDLE
+
 
     if (inputLeft == HIGH && inputRight == LOW) {
         if (inputUp == HIGH && inputDown == LOW)
