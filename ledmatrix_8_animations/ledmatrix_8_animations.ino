@@ -4,10 +4,10 @@
 #define GRIDLENGTH 8  // quadratic led matrix
 
 // pin connections
-#define CLOCKPIN 3
-#define XDATAPIN 5
-#define YDATAPIN 6
-#define LATCHPIN 7
+#define CLOCKPIN 2
+#define XDATAPIN 3
+#define YDATAPIN 5
+#define LATCHPIN 6
 
 unsigned long DISPLAYTIME(1e5);
 
@@ -215,7 +215,7 @@ void shiftOut2D(char DATA[GRIDLENGTH][GRIDLENGTH], unsigned long displayTimeMUS)
     while (micros() < time + displayTimeMUS) {
         for (short i = 0; i < GRIDLENGTH; ++i) {
             for (short j = 0; j < GRIDLENGTH; ++j) {
-                if (DATA[i][j] == 1) { print1at(j, i); } else { print0(); }
+                if (DATA[i][j] == 1) { print1at(j, i); }
             }
         }
     }
